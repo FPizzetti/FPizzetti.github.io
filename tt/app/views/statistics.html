@@ -1,0 +1,25 @@
+<div ng-show="loaded">
+    
+    <div class="notice margin-bottom" ng-hide="logs.length > 0">
+        Not possible to show you any delicious stats yet.
+    </div>
+
+    <div class="margin-bottom">
+        <a href="" class="button button-inline" ng-click="setDays(7)" ng-class="{ 'button-active': days == 7 }">7 days</a>
+        <a href="" class="button button-inline" ng-click="setDays(14)" ng-class="{ 'button-active': days == 14 }">14 days</a>
+        <a href="" class="button button-inline" ng-click="setDays(30)" ng-class="{ 'button-active': days == 30 }">30 days</a>
+    </div>
+    
+</div>
+
+<div ng-hide="loaded">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series"></canvas>

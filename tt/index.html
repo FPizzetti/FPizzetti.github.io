@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="da" ng-app="appTimeTracker">
+<head>
+    <meta charset="utf-8">
+    <title>Time Tracker App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/fontello.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/angular-chart.css">
+</head>
+<body>
+
+    <div class="wrapper" ng-controller="AppController" ng-cloak class="ng-cloak">
+    
+        <!--
+        <div id="login" ng-show="!isRegistered">
+            <div class="align-center">
+                <h1>{{ ::appSettings.applicationName }}</h1>
+                <form ng-submit="signIn(userName)">
+                    <input type="text" ng-model="userName" class="input" placeholder="Choose a username..." />
+                    <input type="submit" class="button button-inline button-blue" value="Start tracking!" />
+                </form>
+            </div>
+        </div>
+        -->
+        
+        <div id="app">
+            
+            <div class="tracker clear" ng-controller="TrackerController" ng-class="{ loading: !loaded }">
+                <div class="actions align-center">
+                    <span class="counter">{{ counter }}</span>
+                    <button class="button button-inline button-large button-green" ng-click="startTracker()" ng-if="!status.active"><i class="icon-play"></i> Start</button>
+                    <button class="button button-inline button-large button-red" ng-click="stopTracker()" ng-if="status.active"><i class="icon-stop"></i> Stop</button>
+                </div>
+                <div class="form">
+                    <div class="form-row">
+                        <label>Project:</label>
+                        <select class="input" ng-model="status.activeProjectId" ng-change="status.$save(status)" ng-disabled="status.active" ng-class="{ disabled: status.active }">
+                            <option ng-selected="{{project.id == status.activeProjectId}}" ng-repeat="project in projectsConverted" value="{{project.id}}">{{project.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>Notes:</label>
+                        <input type="text" ng-model="status.notes" ng-change="status.$save(status)" class="input border-bottom" placeholder="Type your note..." />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container clear">
+                <nav>
+                    <ul>
+                        <li ng-class="{ active: navIsActive('/') }"><a href="#/"><i class="icon-logs"></i>Logs</a></li>
+                        <li ng-class="{ active: navIsActive('/projects') }"><a href="#/projects"><i class="icon-projects"></i>Projects</a></li>
+                        <li ng-class="{ active: navIsActive('/statistics') }"><a href="#/statistics"><i class="icon-stats"></i>Statistics</a></li>
+                    </ul>
+                </nav>
+                <main>
+                    <div ng-view></div>
+                </main>
+            </div>
+            
+            <footer>
+                <strong>{{ ::appSettings.applicationName }}</strong> - <a href="{{ appSettings.applicationUrl }}" target="_blank">about this project</a>
+                <br />
+                Developed by <a href="{{ ::appSettings.developerUrl }}" target="_blank">{{ ::appSettings.developerName }}</a>
+            </footer>
+            
+        </div>
+
+    </div>
+        
+    
+    <!-- Libraries -->
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script type="text/javascript" src="scripts/angular-route.js"></script>
+    <!--<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>-->
+    <script type="text/javascript" src="scripts/firebase.js"></script>
+    <!--<script src="https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.js"></script>-->
+    <script type="text/javascript" src="scripts/angularfire.js"></script>
+    <script type="text/javascript" src="scripts/Chart.js"></script>
+    <script type="text/javascript" src="scripts/angular-chart.js"></script>
+    <script type="text/javascript" src="scripts/moment.js"></script>
+    
+    <!-- App -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/controllers/appController.js"></script>
+    <script type="text/javascript" src="app/controllers/trackerController.js"></script>
+    <script type="text/javascript" src="app/controllers/logsController.js"></script>
+    <script type="text/javascript" src="app/controllers/projectsController.js"></script>
+    <script type="text/javascript" src="app/controllers/statisticsController.js"></script>
+    <script type="text/javascript" src="app/services/statusFactory.js"></script>
+    <script type="text/javascript" src="app/services/logsFactory.js"></script>
+    <script type="text/javascript" src="app/services/projectsFactory.js"></script>
+    <script type="text/javascript" src="app/services/values.js"></script>
+
+</body>
+</html>
