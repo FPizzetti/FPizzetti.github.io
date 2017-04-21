@@ -1,11 +1,9 @@
 (function () {
-
     angular.module('appTimeTracker').value('appSettings', {
         applicationName: 'Real-time Time Tracker App',
-        applicationUrl: 'google.com',
-        developerName: 'Jesper Lund Nielsen',
-        developerUrl: 'google.com',
+        applicationUrl: 'https://fpizzetti.github.io',
+        developerName: 'Felipe',
+        developerUrl: 'https://fpizzetti.github.io',
         firebaseUrl: 'https://tttt-d14fc.firebaseio.com'
     });
-
 }());
